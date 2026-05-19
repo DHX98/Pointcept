@@ -16,10 +16,10 @@ set -euo pipefail
 POINTCEPT_COMMIT="${POINTCEPT_COMMIT:-df36980119f4636beb2d02d04ef3b2fec0fddfba}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/dist}"
+OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/releases/a40_offline}"
 DATE_TAG="$(date +%Y%m%d)"
 STAGING="${OUTPUT_DIR}/.staging_pointcept_a40"
-BUNDLE_NAME="pointcept_a40_offline_${POINTCEPT_COMMIT:0:7}_${DATE_TAG}"
+# BUNDLE_NAME set in main() after resolve_commit()
 
 log() { printf '[package-a40] %s\n' "$*"; }
 die() { log "ERROR: $*"; exit 1; }
@@ -98,6 +98,7 @@ write_manifest() {
 main() {
   [[ -f "${REPO_ROOT}/libs/pointops/setup.py" ]] || die "run from Pointcept repo root"
   commit="$(resolve_commit)"
+  BUNDLE_NAME="pointcept_a40_offline_${commit:0:7}_${DATE_TAG}"
   bundle="${STAGING}/${BUNDLE_NAME}"
 
   log "Commit: ${commit}"

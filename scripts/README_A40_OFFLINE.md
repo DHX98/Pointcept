@@ -78,6 +78,18 @@ bash run_benchmark.sh
 
 覆盖算子：`knn_query`、`grouping`（feat / with_xyz）、`interpolation`、`knn_query_and_group`、`furthestsampling`。
 
+## 从 GitHub 直接下载（已打包）
+
+仓库 `releases/a40_offline/` 目录提供预构建离线包（与当前 `main` 提交一致）：
+
+```bash
+# 克隆后
+cd Pointcept/releases/a40_offline
+sha256sum -c pointcept_a40_offline_*.tar.gz.sha256
+tar xzf pointcept_a40_offline_*.tar.gz
+cd pointcept_a40_offline_* && bash install.sh
+```
+
 ## 在有网络的机器上打包
 
 在已包含本仓库的机器上执行：
@@ -85,8 +97,8 @@ bash run_benchmark.sh
 ```bash
 cd /path/to/Pointcept
 bash scripts/package_for_a40_offline.sh
-# 输出: dist/pointcept_a40_offline_<commit>_<date>.tar.gz
-#       dist/pointcept_a40_offline_<commit>_<date>.tar.gz.sha256
+# 输出: releases/a40_offline/pointcept_a40_offline_<commit>_<date>.tar.gz
+#       releases/a40_offline/pointcept_a40_offline_<commit>_<date>.tar.gz.sha256
 ```
 
 拷贝 `.tar.gz` 与 `.sha256` 到 A40 即可。
